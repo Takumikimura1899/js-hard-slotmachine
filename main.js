@@ -27,9 +27,7 @@ nowTime1.textContent = count1;
 nowTime2.textContent = count2;
 nowTime3.textContent = count3;
 
-
-startBtn.addEventListener('click', () => {
-
+var func = function() {
     stopBtn1.disabled = false;
     stopBtn2.disabled = false;
     stopBtn3.disabled = false;
@@ -43,21 +41,21 @@ startBtn.addEventListener('click', () => {
         if (count1 >= 9) {
             count1 = -1;
         };
-    },1000);
+    },100);
     var timer2 = setInterval(() => {
         count2 ++;
         nowTime2.textContent = count2;
         if (count2 >= 9) {
             count2 = -1;
         };
-    },1000);
+    },100);
     var timer3 = setInterval(() => {
         count3 ++;
         nowTime3.textContent = count3;
         if (count3 >= 9) {
             count3 = -1;
         };
-    },1000);
+    },100);
     startBtn.addEventListener('click', () => {
         clearInterval(timer1);
         clearInterval(timer2);
@@ -71,7 +69,15 @@ startBtn.addEventListener('click', () => {
         stopCounter1 = 1;
         stopCounter = (stopCounter1 + stopCounter2 + stopCounter3);
         console.log(stopCounter);
-    });
+        if (stopCounter === 3){
+            if (count1 === count2 && count2 === count3 ) {
+                alert("おめでとう");
+            } else {
+                alert('ぶっぶー');
+            };
+        };
+    }, { once: true});
+
     // ストップボタン２の処理
     stopBtn2.addEventListener('click', () => {
         clearInterval(timer2);
@@ -79,7 +85,15 @@ startBtn.addEventListener('click', () => {
         stopCounter2 = 1;
         stopCounter = (stopCounter1 + stopCounter2 + stopCounter3);
         console.log(stopCounter);
-    });
+        if (stopCounter === 3){
+            if (count1 === count2 && count2 === count3 ) {
+                alert("おめでとう");
+            } else {
+                alert('ぶっぶー');
+            };
+        };
+    }, { once: true});
+
     // ストップボタン３の処理
     stopBtn3.addEventListener('click', () => {
         clearInterval(timer3);
@@ -88,10 +102,15 @@ startBtn.addEventListener('click', () => {
         stopCounter = (stopCounter1 + stopCounter2 + stopCounter3);
         console.log(stopCounter);
         if (stopCounter === 3){
-            if(count1 === count2 || count2 === count3 ) {
+            if (count1 === count2 && count2 === count3 ) {
                 alert("おめでとう");
+            } else {
+                alert('ぶっぶー');
             };
         };
-    });
+    }, { once: true});
 
-});
+};
+
+startBtn.removeEventListener('click',func);
+startBtn.addEventListener('click', func);
